@@ -40486,6 +40486,7 @@ async function run() {
         }        
 
         for (const regex of regexContent) {
+            core.info(`Checking branch name "${branchName}" against regex pattern "${regex}".`);
             
             const regexPattern = new RegExp(regex);
             
