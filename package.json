@@ -1,6 +1,6 @@
 {
   "name": "branchmatchregex",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -21,7 +21,8 @@
   "homepage": "https://github.com/IamPekka058/branchMatchRegex#readme",
   "dependencies": {
     "@actions/core": "^1.11.1",
-    "@actions/github": "^6.0.1"
+    "@actions/github": "^6.0.1",
+    "yaml": "^2.3.4"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.38.0"

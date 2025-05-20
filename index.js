@@ -15,8 +15,8 @@ async function run() {
         // regex:
         //   - "regex1"
         //   - "regex2"
-        const regex = core.getInput('regex', { required: false, default: null });
-        const pathToRegexFile = core.getInput('path', { required: false, default: null });
+        const regex = core.getInput('regex', { required: false, default: "" });
+        const pathToRegexFile = core.getInput('path', { required: false, default: "" });
         
         // Check if the current branch is a pull request
         const context = github.context;
@@ -27,15 +27,17 @@ async function run() {
 
         const branchName = context.payload.pull_request.head.ref;
 
-        if(pathToRegexFile === null && regex === null) {
+        const isPathEmpty = !pathToRegexFile || pathToRegexFile.trim() === '';
+        const isRegexEmpty = !regex || regex.trim() === '';
+
+        if(isPathEmpty && isRegexEmpty) {
             core.setFailed('Either path or regex must be provided');
             return;
-        } else if(pathToRegexFile !== null && regex !== null) {
+        } else if(!isPathEmpty && !isRegexEmpty) {
             core.info('Only one of path or regex must be provided. Using path.');
-            return;
         }
 
-        const useFile = pathToRegexFile !== null;
+        const useFile = !isPathEmpty;
 
         if (useFile && !fs.existsSync(pathToRegexFile)) {
             core.setFailed(`File "${pathToRegexFile}" does not exist.`);
@@ -49,10 +51,12 @@ async function run() {
             regexContent = YAML.parse(file);
         } else {
             regexContent = YAML.parse(regex);
-        }        
+        }
+        if (!Array.isArray(regexContent)) {
+            regexContent = [regexContent];
+        }
 
         for (const regex of regexContent) {
-            
             const regexPattern = new RegExp(regex);
             
             if (regexPattern.test(branchName)) {
@@ -66,3 +70,5 @@ async function run() {
         core.setFailed(error.message);
     }
 }
+
+run();

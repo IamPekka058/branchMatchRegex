@@ -34,7 +34,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run branchMatchRegex action
-        uses: IamPekka058/branchMatchRegex@v0.1.1
+        uses: IamPekka058/branchMatchRegex@v0.1.2
         with:
           regex: 'feature/*'
 ```
