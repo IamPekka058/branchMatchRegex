@@ -1,0 +1,26 @@
+{
+  "name": "branchmatchregex",
+  "version": "0.1.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "build": "ncc build index.js --license LICENSE",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IamPekka058/branchMatchRegex.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IamPekka058/branchMatchRegex/issues"
+  },
+  "homepage": "https://github.com/IamPekka058/branchMatchRegex#readme",
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.1"
+  }
+}

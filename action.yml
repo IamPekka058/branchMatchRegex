@@ -1,0 +1,15 @@
+name: 'branchMatchRegex'
+description: 'Check if the current branch matches a regex pattern'
+inputs:
+  regex:
+    description: 'The regex pattern to match the branch name against'
+    required: false
+    default: null
+  path:
+    description: 'The path to the file containing the regex pattern'
+    required: false
+    default: null
+  
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
