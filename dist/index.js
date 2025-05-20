@@ -40464,7 +40464,6 @@ async function run() {
             return;
         } else if(pathToRegexFile !== null && regex !== null) {
             core.info('Only one of path or regex must be provided. Using path.');
-            return;
         }
 
         const useFile = pathToRegexFile !== null;
