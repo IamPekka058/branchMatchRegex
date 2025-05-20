@@ -40483,7 +40483,10 @@ async function run() {
             regexContent = YAML.parse(file);
         } else {
             regexContent = YAML.parse(regex);
-        }        
+        }
+        if (!Array.isArray(regexContent)) {
+            regexContent = [regexContent];
+        }
 
         for (const regex of regexContent) {
             core.info(`Checking branch name "${branchName}" against regex pattern "${regex}".`);
