@@ -16,23 +16,23 @@ jobs:
           node-version: '20'
 
       - name: Test with list
-        uses: IamPekka058/branchMatchRegex@main
+        uses: ./
         with:
           regex: |
             - 'feature/*'
             - 'test/*'
 
       - name: Test with inline list
-        uses: IamPekka058/branchMatchRegex@main
+        uses: ./
         with:
           regex: "['feature/*', 'test/*']"
 
       - name: Test with file
-        uses: IamPekka058/branchMatchRegex@main
+        uses: ./
         with:
           path: .github/workflows/branches.yml
 
       - name: Test with file
-        uses: IamPekka058/branchMatchRegex@main
+        uses: ./
         with:
           useDefaultPatterns: true
