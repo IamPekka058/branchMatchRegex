@@ -18,7 +18,15 @@ async function run() {
         //   - "regex2"
         const regex = core.getInput('regex', { required: false, default: "" });
         const regexfile = core.getInput('path', { required: false, default: "" });
+
+        const useDefaultPatterns = core.getInput('useDefaultPatterns', { required: false, default: "false" });
         const pathToRegexFile = path.resolve(regexfile);
+
+        if (useDefaultPatterns === 'true') {
+            core.info('Using standard list of regex patterns.');
+            pathToRegexFile = path.resolve(__dirname, 'default-patterns.yml');
+        }
+
         // Check if the current branch is a pull request
         const context = github.context;
         if (!context.payload.pull_request) {
