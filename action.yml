@@ -4,11 +4,15 @@ inputs:
   regex:
     description: 'The regex pattern to match the branch name against'
     required: false
-    default: null
+    default: ''
   path:
     description: 'The path to the file containing the regex pattern'
     required: false
-    default: null
+    default: ''
+  useDefaultPatterns:
+    description: 'Use default patterns for branch matching'
+    required: false
+    default: false
   
 runs:
   using: 'node20'
