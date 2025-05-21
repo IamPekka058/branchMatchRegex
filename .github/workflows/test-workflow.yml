@@ -22,7 +22,7 @@ jobs:
             - 'feature/*'
             - 'test/*'
 
-      - name: Test with list
+      - name: Test with inline list
         uses: IamPekka058/branchMatchRegex@main
         with:
           regex: "['feature/*', 'test/*']"
