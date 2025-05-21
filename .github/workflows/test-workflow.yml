@@ -31,3 +31,8 @@ jobs:
         uses: IamPekka058/branchMatchRegex@main
         with:
           path: .github/workflows/branches.yml
+
+      - name: Test with file
+        uses: IamPekka058/branchMatchRegex@main
+        with:
+          useDefaultPatterns: true
