@@ -30,4 +30,4 @@ jobs:
       - name: Test with file
         uses: IamPekka058/branchMatchRegex@main
         with:
-          path: ./.github/workflows/branches.yml
+          path: .github/workflows/branches.yml
