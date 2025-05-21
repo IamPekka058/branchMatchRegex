@@ -45,7 +45,7 @@ Below is an example of how to use the `branchMatchRegex` action in a GitHub work
         - 'hotfix/*'
 ```
 
-### Example 3: Regex Patterns from a File
+### Example 4: Regex Patterns from a File
 ```yaml
 - name: Run branchMatchRegex action
   uses: IamPekka058/branchMatchRegex@v0
