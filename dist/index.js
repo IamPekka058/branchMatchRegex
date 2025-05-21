@@ -40449,8 +40449,17 @@ async function run() {
         //   - "regex1"
         //   - "regex2"
         const regex = core.getInput('regex', { required: false, default: "" });
-        const regexfile = core.getInput('path', { required: false, default: "" });
-        const pathToRegexFile = path.resolve(regexfile);
+        const useDefaultPatterns = core.getInput('useDefaultPatterns', { required: false, default: "false" });
+
+        let regexfile = core.getInput('path', { required: false, default: "" });
+        let pathToRegexFile = path.resolve(regexfile);
+
+        if (useDefaultPatterns === 'true') {
+            core.info('Using standard list of regex patterns.');
+            regexfile = 'default-patterns.yml';
+            pathToRegexFile = __nccwpck_require__.ab + "default-patterns.yml";
+        }
+
         // Check if the current branch is a pull request
         const context = github.context;
         if (!context.payload.pull_request) {
@@ -40472,7 +40481,7 @@ async function run() {
 
         const useFile = !isPathEmpty;
 
-        if (useFile && !fs.existsSync(pathToRegexFile)) {
+        if (useFile && !fs.existsSync(__nccwpck_require__.ab + "default-patterns.yml")) {
             core.setFailed(`File "${pathToRegexFile}" does not exist.`);
             return;
         }
@@ -40480,7 +40489,7 @@ async function run() {
         let regexContent = [];
         
         if (useFile) {
-            const file = fs.readFileSync(pathToRegexFile, 'utf8');
+            const file = fs.readFileSync(__nccwpck_require__.ab + "default-patterns.yml", 'utf8');
             regexContent = YAML.parse(file);
         } else {
             regexContent = YAML.parse(regex);

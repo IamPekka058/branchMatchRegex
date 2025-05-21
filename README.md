@@ -10,20 +10,49 @@
 > 
 > **Currently, this action can only be used in the context of a Pull Request.** It always uses the `head` branch (the source branch of the PR) for matching against the provided regex pattern(s). Support for running in other contexts and specifying a custom branch via a dedicated input is planned for a future release.
 
+> If you use `useDefaultPatterns: true`, see [DEFAULT_PATTERNS.md](./DEFAULT_PATTERNS.md) for a detailed explanation of the default branch patterns.
+
 ## Inputs
 
-| Name   | Description                                              | Required | Default |
-|--------|----------------------------------------------------------|----------|---------|
-| `regex`| The regex pattern to match the branch name against.      | No       | ""      |
-| `path` | The path to a file containing the regex pattern(s).      | No       | ""      |
+| Name               | Description                                                                 | Required | Default |
+|--------------------|-----------------------------------------------------------------------------|----------|---------|
+| `regex`            | The regex pattern to match the branch name against.                          | No       | ""      |
+| `path`             | The path to a file containing the regex pattern(s).                          | No       | ""      |
+| `useDefaultPatterns` | Use built-in default patterns if no regex or path is provided.               | No       | false    |
 
-> **Note**: Either `regex` or `path` must be provided. If both are provided, the `path` input takes precedence.
+> **Note**: Either `regex`, `path`, or `useDefaultPatterns` must be provided. If both `regex` and `path` are provided, the `path` input takes precedence.
 
 ## Example Usage
 
 Below is an example of how to use the `branchMatchRegex` action in a GitHub workflow:
 
 ### Example 1: Single Regex Pattern
+```yaml
+- name: Run branchMatchRegex action
+  uses: IamPekka058/branchMatchRegex@v0
+  with:
+    regex: 'feature/*'
+```
+
+### Example 2: Inline list of Regex Patterns
+```yaml
+- name: Run branchMatchRegex action
+  uses: IamPekka058/branchMatchRegex@v0
+  with:
+    regex: "['feature/*', 'bugfix/*','hotfix/*']"
+```
+### Example 3: List of Regex Patterns
+```yaml
+- name: Run branchMatchRegex action
+  uses: IamPekka058/branchMatchRegex@v0
+  with:
+    regex: |
+        - 'feature/*'
+        - 'bugfix/*'
+        - 'hotfix/*'
+```
+
+### Example 4: Regex Patterns from a File
 ```yaml
 - name: Run branchMatchRegex action
   uses: IamPekka058/branchMatchRegex@v0
@@ -63,6 +92,10 @@ The `branch-regex-patterns.yml` file could look like this:
 - 'bugfix/*'
 - 'hotfix/*'
 ```
+    path: './branch-regex-patterns.yml'
+```
+
+In the third example, the file `branch-regex-patterns.txt` should contain one regex pattern per line.
 
 ## License
 
