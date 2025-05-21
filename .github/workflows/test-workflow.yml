@@ -18,4 +18,11 @@ jobs:
       - name: Run branchMatchRegex action
         uses: ./
         with:
-          regex: 'feature/*'
+          regex: |
+            - 'feature/*'
+            - 'test/*'
+          
+      - name: Run branchMatchRegex action
+        uses: ./
+        with:
+          path: ./.github/workflows/branches.yml
