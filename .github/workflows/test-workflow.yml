@@ -15,7 +15,19 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Run branchMatchRegex action
-        uses: ./
+      - name: Test with list
+        uses: IamPekka058/branchMatchRegex@main
         with:
-          regex: 'feature/*'
+          regex: |
+            - 'feature/*'
+            - 'test/*'
+      
+      - name: Test with list
+        uses: IamPekka058/branchMatchRegex@main
+        with:
+          regex: ['feature/*', 'test/*']
+
+      - name: Test with file
+        uses: IamPekka058/branchMatchRegex@main
+        with:
+          path: ./.github/workflows/branches.yml
