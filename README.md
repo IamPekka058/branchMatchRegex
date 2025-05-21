@@ -1,45 +1,59 @@
 # branchMatchRegex
 
-`branchMatchRegex` is a GitHub Action that checks if the current branch name matches a specified regex pattern. This is particularly useful for enforcing branch naming conventions in your repositories.
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/IamPekka058/branchMatchRegex)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/IamPekka058/branchMatchRegex/.github/workflows/build-and-commit.yml)
+![GitHub](https://img.shields.io/github/license/IamPekka058/branchMatchRegex)
+
+`branchMatchRegex` is  GitHub Action that checks if the current branch name matches a specified regex pattern. This is particularly useful for enforcing branch naming conventions in your repositories.
 
 ## Inputs
 
-### `regex`
-- **Description**: The regex pattern to match the branch name against.
-- **Required**: No
-- **Default**: `null`
+| Name   | Description                                              | Required | Default |
+|--------|----------------------------------------------------------|----------|---------|
+| `regex`| The regex pattern to match the branch name against.      | No       | ""      |
+| `path` | The path to a file containing the regex pattern(s).      | No       | ""      |
 
-### `path`
-- **Description**: The path to a file containing the regex pattern(s).
-- **Required**: No
-- **Default**: `null`
-
-> **Note**: Either `regex` or `path` must be provided, but not both. If both are provided, the `path` input takes precedence.
+> **Note**: Either `regex` or `path` must be provided. If both are provided, the `path` input takes precedence.
 
 ## Example Usage
 
 Below is an example of how to use the `branchMatchRegex` action in a GitHub workflow:
 
+### Example 1: Single Regex Pattern
 ```yaml
-ame: Test branchMatchRegex Action
-on:
-  pull_request:
-    types: [opened, synchronize]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
       - name: Run branchMatchRegex action
-        uses: IamPekka058/branchMatchRegex@v0.1.2
+        uses: IamPekka058/branchMatchRegex@v0
         with:
           regex: 'feature/*'
 ```
 
-In this example, the action checks if the branch name matches the pattern `feature/*`.
+### Example 2: Inline list of Regex Patterns
+```yaml
+- name: Run branchMatchRegex action
+  uses: IamPekka058/branchMatchRegex@v0
+  with:
+    regex: "['feature/*', 'bugfix/*','hotfix/*']"
+```
+### Example 3: List of Regex Patterns
+```yaml
+- name: Run branchMatchRegex action
+  uses: IamPekka058/branchMatchRegex@v0
+  with:
+    regex: |
+        - 'feature/*'
+        - 'bugfix/*'
+        - 'hotfix/*'
+```
+
+### Example 3: Regex Patterns from a File
+```yaml
+- name: Run branchMatchRegex action
+  uses: IamPekka058/branchMatchRegex@v0
+  with:
+    path: './branch-regex-patterns.yml'
+```
+
+In the third example, the file `branch-regex-patterns.txt` should contain one regex pattern per line.
 
 ## License
 
