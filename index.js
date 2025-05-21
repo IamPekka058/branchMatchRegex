@@ -1,5 +1,6 @@
 const fs = require('fs');
 const YAML = require('yaml');
+const path = require('path');
 
 const core = require('@actions/core');
 const github = require('@actions/github');
