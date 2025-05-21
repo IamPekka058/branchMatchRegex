@@ -20,7 +20,7 @@ async function run() {
         const regexfile = core.getInput('path', { required: false, default: "" });
 
         const useDefaultPatterns = core.getInput('useDefaultPatterns', { required: false, default: "false" });
-        const pathToRegexFile = path.resolve(regexfile);
+        let pathToRegexFile = path.resolve(regexfile);
 
         if (useDefaultPatterns === 'true') {
             core.info('Using standard list of regex patterns.');
