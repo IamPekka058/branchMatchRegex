@@ -16,7 +16,7 @@ async function run() {
         //   - "regex1"
         //   - "regex2"
         const regex = core.getInput('regex', { required: false, default: "" });
-        const pathToRegexFile = core.getInput('path', { required: false, default: "" });
+        const pathToRegexFile = path.resolve(core.getInput('path', { required: false, default: "" }));
         
         // Check if the current branch is a pull request
         const context = github.context;
