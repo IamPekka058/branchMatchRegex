@@ -57,10 +57,24 @@ Below is an example of how to use the `branchMatchRegex` action in a GitHub work
 - name: Run branchMatchRegex action
   uses: IamPekka058/branchMatchRegex@v0
   with:
-    path: './branch-regex-patterns.yml'
+    path: 'branch-regex-patterns.yml'
 ```
 
-In the third example, the file `branch-regex-patterns.txt` should contain one regex pattern per line.
+The `branch-regex-patterns.yml` file could look like this:
+```yaml
+- 'feature/*'
+- 'bugfix/*'
+- 'hotfix/*'
+```
+
+### Example 5: Use Default Patterns
+```yaml
+- name: Run branchMatchRegex action
+  uses: IamPekka058/branchMatchRegex@v0
+  with:
+    useDefaultPatterns: true
+```
+
 
 ## License
 
