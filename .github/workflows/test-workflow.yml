@@ -25,7 +25,7 @@ jobs:
       - name: Test with list
         uses: IamPekka058/branchMatchRegex@main
         with:
-          regex: ['feature/*', 'test/*']
+          regex: "['feature/*', 'test/*']"
 
       - name: Test with file
         uses: IamPekka058/branchMatchRegex@main
