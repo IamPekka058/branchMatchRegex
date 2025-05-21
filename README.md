@@ -21,10 +21,10 @@ Below is an example of how to use the `branchMatchRegex` action in a GitHub work
 
 ### Example 1: Single Regex Pattern
 ```yaml
-      - name: Run branchMatchRegex action
-        uses: IamPekka058/branchMatchRegex@v0
-        with:
-          regex: 'feature/*'
+- name: Run branchMatchRegex action
+  uses: IamPekka058/branchMatchRegex@v0
+  with:
+    regex: 'feature/*'
 ```
 
 ### Example 2: Inline list of Regex Patterns
