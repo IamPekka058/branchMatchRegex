@@ -17,13 +17,14 @@ async function run() {
         //   - "regex1"
         //   - "regex2"
         const regex = core.getInput('regex', { required: false, default: "" });
-        const regexfile = core.getInput('path', { required: false, default: "" });
-
         const useDefaultPatterns = core.getInput('useDefaultPatterns', { required: false, default: "false" });
+
+        let regexfile = core.getInput('path', { required: false, default: "" });
         let pathToRegexFile = path.resolve(regexfile);
 
         if (useDefaultPatterns === 'true') {
             core.info('Using standard list of regex patterns.');
+            regexfile = 'default-patterns.yml';
             pathToRegexFile = path.resolve(__dirname, 'default-patterns.yml');
         }
 
@@ -36,7 +37,7 @@ async function run() {
 
         const branchName = context.payload.pull_request.head.ref;
 
-        const isPathEmpty = !regexfile || regexfile.trim() === '' || pathToRegexFile.trim() === '';
+        const isPathEmpty = !regexfile || regexfile.trim() === '';
         const isRegexEmpty = !regex || regex.trim() === '';
 
         if(isPathEmpty && isRegexEmpty) {
