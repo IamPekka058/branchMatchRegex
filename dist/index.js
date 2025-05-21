@@ -40449,8 +40449,8 @@ async function run() {
         //   - "regex1"
         //   - "regex2"
         const regex = core.getInput('regex', { required: false, default: "" });
-        const pathToRegexFile = path.resolve(core.getInput('path', { required: false, default: "" }));
-        
+        const regexfile = core.getInput('path', { required: false, default: "" });
+        const pathToRegexFile = path.resolve(regexfile);
         // Check if the current branch is a pull request
         const context = github.context;
         if (!context.payload.pull_request) {
@@ -40460,7 +40460,7 @@ async function run() {
 
         const branchName = context.payload.pull_request.head.ref;
 
-        const isPathEmpty = !pathToRegexFile || pathToRegexFile.trim() === '';
+        const isPathEmpty = !regexfile || regexfile.trim() === '';
         const isRegexEmpty = !regex || regex.trim() === '';
 
         if(isPathEmpty && isRegexEmpty) {
