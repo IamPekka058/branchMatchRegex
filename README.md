@@ -57,7 +57,7 @@ Below is an example of how to use the `branchMatchRegex` action in a GitHub work
     path: './branch-regex-patterns.yml'
 ```
 
-An example of the `branch-regex-patterns.yml` file:
+The `branch-regex-patterns.yml` file could look like this:
 ```yaml
 - 'feature/*'
 - 'bugfix/*'
