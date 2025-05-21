@@ -6,6 +6,10 @@
 
 `branchMatchRegex` is  GitHub Action that checks if the current branch name matches a specified regex pattern. This is particularly useful for enforcing branch naming conventions in your repositories.
 
+> **Disclaimer**:
+> 
+> **Currently, this action can only be used in the context of a Pull Request.** It always uses the `head` branch (the source branch of the PR) for matching against the provided regex pattern(s). Support for running in other contexts and specifying a custom branch via a dedicated input is planned for a future release.
+
 ## Inputs
 
 | Name   | Description                                              | Required | Default |
