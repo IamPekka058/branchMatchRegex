@@ -40468,7 +40468,7 @@ async function run() {
 
         const branchName = context.payload.pull_request.head.ref;
 
-        const isPathEmpty = !regexfile || regexfile.trim() === '';
+        const isPathEmpty = !regexfile || regexfile.trim() === '' || regexfile.trim() === '';
         const isRegexEmpty = !regex || regex.trim() === '';
 
         if(isPathEmpty && isRegexEmpty) {
