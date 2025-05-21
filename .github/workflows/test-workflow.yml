@@ -19,13 +19,8 @@ jobs:
         uses: ./
         with:
           regex: |
-          - 'feature/*'
-          - 'test/*'
-
-      - name: Run branchMatchRegex action
-        uses: ./
-        with:
-          regex: ['feature/*', 'test/*']
+            - 'feature/*'
+            - 'test/*'
           
       - name: Run branchMatchRegex action
         uses: ./
