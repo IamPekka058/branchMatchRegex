@@ -1,5 +1,8 @@
 name: 'branchMatchRegex'
 description: 'Check if the current branch matches a regex pattern'
+author: 'IamPekka058 <59747867+IamPekka058@users.noreply.github.com>'
+
+
 inputs:
   regex:
     description: 'The regex pattern to match the branch name against'
