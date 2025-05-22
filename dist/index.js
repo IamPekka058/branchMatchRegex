@@ -40512,10 +40512,10 @@ function validateInput(inputPath, regex, useDefaultPatterns) {
 }
 
 function populateDefaultPatterns(inputPath, useDefaultPatterns) {
-    if(useDefaultPatterns === true || useDefaultPatterns === 'true') {
+    if (useDefaultPatterns === true || useDefaultPatterns === 'true') {
         return __nccwpck_require__.ab + "default-patterns.yml";
     }
-    return path.join(__dirname, inputPath);
+    return inputPath;
 }
 
 function unmatchedRegex(branchName, failOnUnmatchedRegex) {
