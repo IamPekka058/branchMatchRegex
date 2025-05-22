@@ -16,6 +16,10 @@ inputs:
     description: 'Use default patterns for branch matching'
     required: false
     default: false
+  branch:
+    description: 'The branch name to check against the regex pattern'
+    required: false
+    default: ${{ github.head_ref }}
   
 runs:
   using: 'node20'
