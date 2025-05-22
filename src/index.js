@@ -80,7 +80,7 @@ function validateInput(inputPath, regex, useDefaultPatterns) {
 }
 
 function populateDefaultPatterns(inputPath, useDefaultPatterns) {
-    if(useDefaultPatterns === true){
+    if(useDefaultPatterns === true || useDefaultPatterns === 'true') {
         return 'default-patterns.yml';
     }
 
