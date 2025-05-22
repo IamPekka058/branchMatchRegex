@@ -63,7 +63,7 @@ async function run() {
 }
 
 function validateInput(inputPath, regex, useDefaultPatterns) {
-    let bothFilesSpecified = inputPath && useDefaultPatterns;
+    let bothFilesSpecified = inputPath && (useDefaultPatterns === true || useDefaultPatterns === "true");
     let allInputsEmpty = !inputPath && !regex && !useDefaultPatterns;
     let bothInputAndRegexSpecified = inputPath && regex;
     
@@ -106,7 +106,7 @@ function validateContext() {
 }
 
 function parseYAML(useFile, filePath, regex) {
-    if (useFile) {
+    if (useFile === true || useFile === 'true') {
         const file = fs.readFileSync(filePath, 'utf8');
         return YAML.parse(file);
     } else {
