@@ -17,11 +17,10 @@ async function run() {
         //   - "regex1"
         //   - "regex2"
         const regex = core.getInput('regex', { required: false, default: "" });
-        const useDefaultPatterns = core.getInput('useDefaultPatterns', { required: false, default: "false" });
-        const failOnUnmatchedRegex = core.getInput('failOnUnmatchedRegex', { required: false, default: "true" });
+        const useDefaultPatterns = core.getInput('useDefaultPatterns', { required: false, default: false });
+        const failOnUnmatchedRegex = core.getInput('failOnUnmatchedRegex', { required: false, default: true });
         const inputPath = core.getInput('path', { required: false, default: "" });
         const branchName = core.getInput('branchName', { required: false, default: github.head_ref  });
-        const context = github.context;
         
 
         let pathToRegexFile = populateDefaultPatterns(inputPath, useDefaultPatterns);
@@ -29,7 +28,7 @@ async function run() {
         validateContext();
 
         validateInput(inputPath, regex, useDefaultPatterns);
-        
+
         const useFile = pathToRegexFile && pathToRegexFile.strip !== '';
 
         if (useFile && !fs.existsSync(pathToRegexFile)) {
