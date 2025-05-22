@@ -22,7 +22,6 @@ async function run() {
         const inputPath = core.getInput('path', { required: false, default: "" });
         const branchName = core.getInput('branchName', { required: false, default: github.head_ref  });
         
-
         let pathToRegexFile = populateDefaultPatterns(inputPath, useDefaultPatterns);
 
         validateContext();
