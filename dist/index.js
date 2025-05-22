@@ -40450,36 +40450,20 @@ async function run() {
         //   - "regex2"
         const regex = core.getInput('regex', { required: false, default: "" });
         const useDefaultPatterns = core.getInput('useDefaultPatterns', { required: false, default: "false" });
-
-        let regexfile = core.getInput('path', { required: false, default: "" });
-        let pathToRegexFile = path.resolve(regexfile);
-
-        if (useDefaultPatterns === 'true') {
-            core.info('Using standard list of regex patterns.');
-            regexfile = 'default-patterns.yml';
-            pathToRegexFile = path.resolve(__dirname, 'default-patterns.yml');
-        }
-
-        // Check if the current branch is a pull request
+        const failOnUnmatchedRegex = core.getInput('failOnUnmatchedRegex', { required: false, default: "true" });
+        const inputPath = core.getInput('path', { required: false, default: "" });
         const context = github.context;
-        if (!context.payload.pull_request) {
-            core.setFailed('This action can only be run in the context of a pull request');
-            return;
-        }
+        
+
+        let pathToRegexFile = populateDefaultPatterns(inputPath, useDefaultPatterns);
+
+        validateContext();
 
         const branchName = context.payload.pull_request.head.ref;
 
-        const isPathEmpty = !regexfile || regexfile.trim() === '';
-        const isRegexEmpty = !regex || regex.trim() === '';
+        validateInput(inputPath, regex, useDefaultPatterns);
 
-        if(isPathEmpty && isRegexEmpty) {
-            core.setFailed('Either path or regex must be provided');
-            return;
-        } else if(!isPathEmpty && !isRegexEmpty) {
-            core.info('Only one of path or regex must be provided. Using path.');
-        }
-
-        const useFile = !isPathEmpty;
+        const useFile = pathToRegexFile && pathToRegexFile.strip !== '';
 
         if (useFile && !fs.existsSync(pathToRegexFile)) {
             core.setFailed(`File "${pathToRegexFile}" does not exist.`);
@@ -40488,12 +40472,8 @@ async function run() {
         
         let regexContent = [];
         
-        if (useFile) {
-            const file = fs.readFileSync(pathToRegexFile, 'utf8');
-            regexContent = YAML.parse(file);
-        } else {
-            regexContent = YAML.parse(regex);
-        }
+        regexContent = parseYAML(useFile, pathToRegexFile, regex);
+        
         if (!Array.isArray(regexContent)) {
             regexContent = [regexContent];
         }
@@ -40507,9 +40487,62 @@ async function run() {
             }
         }
 
-        core.setFailed(`Branch name "${branchName}" does not match any of the provided regex patterns.`);
+        unmatchedRegex(branchName, failOnUnmatchedRegex);
+
     } catch (error) {
         core.setFailed(error.message);
+    }
+}
+
+function validateInput(inputPath, regex, useDefaultPatterns) {
+    let bothFilesSpecified = inputPath && useDefaultPatterns;
+    let allInputsEmpty = !inputPath && !regex && !useDefaultPatterns;
+    let bothInputAndRegexSpecified = inputPath && regex;
+    
+    if(bothFilesSpecified){
+        core.setFailed('Path and useDefaultPatterns cannot be used together.');
+    }
+
+    if(allInputsEmpty){ 
+        core.setFailed('Either path, regex or useDefaultPatterns must be provided.');
+    }
+
+    if(bothInputAndRegexSpecified) {
+        core.info('Only one of path or regex must be provided. Using path.');
+    }
+}
+
+function populateDefaultPatterns(inputPath, useDefaultPatterns) {
+    if(useDefaultPatterns === true){
+        return 'default-patterns.yml';
+    }
+
+    return inputPath;
+
+}
+
+function unmatchedRegex(branchName, failOnUnmatchedRegex) {
+    if (failOnUnmatchedRegex) {
+        core.setFailed(`Branch name "${branchName}" does not match any of the provided regex patterns.`);
+    } else {
+        // TODO: Comment on
+    }
+}
+
+function validateContext() {
+    const context = github.context;
+    if (!context.payload.pull_request) {
+        core.setFailed('This action can only be run in the context of a pull request');
+        return;
+    }
+}
+
+function parseYAML(useFile, filePath, regex) {
+    if (useFile) {
+        const file = fs.readFileSync(filePath, 'utf8');
+        return YAML.parse(file);
+    } else {
+        return YAML.parse(regex);
     }
 }
 
