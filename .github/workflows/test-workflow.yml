@@ -14,18 +14,35 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '20'
-
+      
+      - name: Test with single pattern
+        uses: ./
+        with:
+          regex: '*'
+        
       - name: Test with list
         uses: ./
         with:
           regex: |
-            - 'feature/*'
-            - 'test/*'
+            - feature/*
+            - fix/*
+            - hotfix/*
+            - docs/*
+            - test/*
+            - refactor/*
+            - style/*
+            - ci/*
+            - perf/*
+            - i18n/*
+            - security/*
+            - release/*
+            - chore/*
+            - test/*
 
       - name: Test with inline list
         uses: ./
         with:
-          regex: "['feature/*', 'test/*']"
+          regex: "['feature/*', 'fix/*', 'hotfix/*', 'docs/*', 'test/*', 'refactor/*', 'style/*', 'ci/*', 'perf/*', 'i18n/*', 'security/*', 'release/*', 'chore/*', 'test/*']"
 
       - name: Test with file
         uses: ./
