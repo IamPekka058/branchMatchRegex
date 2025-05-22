@@ -18,7 +18,7 @@ jobs:
       - name: Test with single pattern
         uses: ./
         with:
-          regex: '*'
+          regex: ".*"
         
       - name: Test with list
         uses: ./
