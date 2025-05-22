@@ -47,7 +47,7 @@ jobs:
       - name: Test with file
         uses: ./
         with:
-          path: .github/workflows/branches.yml
+          path: .github/branches.yml
 
       - name: Test with file
         uses: ./
