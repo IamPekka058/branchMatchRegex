@@ -14,13 +14,15 @@
 
 ## Inputs
 
-| Name               | Description                                                                 | Required | Default |
-|--------------------|-----------------------------------------------------------------------------|----------|---------|
-| `regex`            | The regex pattern to match the branch name against.                          | No       | ""      |
-| `path`             | The path to a file containing the regex pattern(s).                          | No       | ""      |
-| `useDefaultPatterns` | Use built-in default patterns if no regex or path is provided.               | No       | false    |
+| Name                 | Description                                                      | Required | Default                |
+|----------------------|------------------------------------------------------------------|----------|------------------------|
+| `regex`              | The regex pattern to match the branch name against.              | No       | ""                    |
+| `path`               | The path to the file containing the regex pattern.               | No       | ""                    |
+| `useDefaultPatterns` | Use default patterns for branch matching.                        | No       | false                  |
+| `failOnUnmatchedRegex` | Fail the action if the branch does not match the regex pattern. | No       | true                  |
+| `branchName`         | The branch name to check against the regex pattern.              | No       | ${{ github.head_ref }} |
 
-> **Note**: Either `regex`, `path`, or `useDefaultPatterns` must be provided. If both `regex` and `path` are provided, the `path` input takes precedence.
+> **Note**: Either `regex`, `path`, or `useDefaultPatterns` must be provided. If both `regex` and `path` are provided, the `path` input takes precedence. You can't use `useDefaultPatterns` and `path` at the same time.
 
 ## Example Usage
 

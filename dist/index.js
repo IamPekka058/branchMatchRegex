@@ -40449,17 +40449,14 @@ async function run() {
         //   - "regex1"
         //   - "regex2"
         const regex = core.getInput('regex', { required: false, default: "" });
-        const useDefaultPatterns = core.getInput('useDefaultPatterns', { required: false, default: "false" });
-        const failOnUnmatchedRegex = core.getInput('failOnUnmatchedRegex', { required: false, default: "true" });
+        const useDefaultPatterns = core.getInput('useDefaultPatterns', { required: false, default: false });
+        const failOnUnmatchedRegex = core.getInput('failOnUnmatchedRegex', { required: false, default: true });
         const inputPath = core.getInput('path', { required: false, default: "" });
-        const context = github.context;
+        const branchName = core.getInput('branchName', { required: false, default: github.head_ref  });
         
-
         let pathToRegexFile = populateDefaultPatterns(inputPath, useDefaultPatterns);
 
         validateContext();
-
-        const branchName = context.payload.pull_request.head.ref;
 
         validateInput(inputPath, regex, useDefaultPatterns);
 
@@ -40501,10 +40498,12 @@ function validateInput(inputPath, regex, useDefaultPatterns) {
     
     if(bothFilesSpecified){
         core.setFailed('Path and useDefaultPatterns cannot be used together.');
+        return;
     }
 
     if(allInputsEmpty){ 
         core.setFailed('Either path, regex or useDefaultPatterns must be provided.');
+        return;
     }
 
     if(bothInputAndRegexSpecified) {
@@ -40513,26 +40512,27 @@ function validateInput(inputPath, regex, useDefaultPatterns) {
 }
 
 function populateDefaultPatterns(inputPath, useDefaultPatterns) {
-    if(useDefaultPatterns === true){
-        return 'default-patterns.yml';
+    if (useDefaultPatterns === true || useDefaultPatterns === 'true') {
+        return __nccwpck_require__.ab + "default-patterns.yml";
     }
-
     return inputPath;
-
 }
 
 function unmatchedRegex(branchName, failOnUnmatchedRegex) {
     if (failOnUnmatchedRegex) {
         core.setFailed(`Branch name "${branchName}" does not match any of the provided regex patterns.`);
+        return;
     } else {
         // TODO: Comment on
     }
 }
 
-function validateContext() {
+function validateContext(branchName) {
     const context = github.context;
-    if (!context.payload.pull_request) {
-        core.setFailed('This action can only be run in the context of a pull request');
+    let branchNameUndefined = branchName === undefined || branchName === null || branchName.strip() === '';
+    
+    if (branchNameUndefined && !context.payload.pull_request) {
+        core.setFailed('If branchName is not provided, the action must be run in a pull request context.');
         return;
     }
 }
