@@ -53,3 +53,9 @@ jobs:
         uses: ./
         with:
           useDefaultPatterns: true
+
+      - name: Test with file and branch name
+        uses: ./
+        with:
+          useDefaultPatterns: true
+          branchName: "feature/test"
