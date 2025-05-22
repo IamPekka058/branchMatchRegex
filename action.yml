@@ -20,7 +20,7 @@ inputs:
     description: 'Fail the action if the branch does not match the regex pattern'
     required: false
     default: false
-  branch:
+  branchName:
     description: 'The branch name to check against the regex pattern'
     required: false
     default: ${{ github.head_ref }}
