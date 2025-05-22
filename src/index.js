@@ -81,11 +81,9 @@ function validateInput(inputPath, regex, useDefaultPatterns) {
 
 function populateDefaultPatterns(inputPath, useDefaultPatterns) {
     if(useDefaultPatterns === true || useDefaultPatterns === 'true') {
-        return 'default-patterns.yml';
+        return path.join(__dirname, '../assets/default-patterns.yml');
     }
-
-    return inputPath;
-
+    return path.join(__dirname, inputPath);
 }
 
 function unmatchedRegex(branchName, failOnUnmatchedRegex) {
