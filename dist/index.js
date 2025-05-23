@@ -29915,14 +29915,6 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
-/***/ 3314:
-/***/ ((module) => {
-
-module.exports = eval("require")("react");
-
-
-/***/ }),
-
 /***/ 2613:
 /***/ ((module) => {
 
@@ -40444,7 +40436,6 @@ const path = __nccwpck_require__(6928);
 
 const core = __nccwpck_require__(7484);
 const github = __nccwpck_require__(3228);
-const { use } = __nccwpck_require__(3314);
 
 async function run() {
     try{
