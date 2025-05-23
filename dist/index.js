@@ -40476,7 +40476,7 @@ async function run() {
             regexContent = [regexContent];
         }
 
-        for (const regex of regexContent) {
+        for (regex of regexContent) {
 
             if (useWildcard === 'true' || useWildcard === true) {
                 core.info(`Using wildcard regex: "${regex}"`);
