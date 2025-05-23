@@ -6,21 +6,18 @@
 
 `branchMatchRegex` is  GitHub Action that checks if the current branch name matches a specified regex pattern. This is particularly useful for enforcing branch naming conventions in your repositories.
 
-> **Disclaimer**:
-> 
-> **Currently, this action can only be used in the context of a Pull Request.** It always uses the `head` branch (the source branch of the PR) for matching against the provided regex pattern(s). Support for running in other contexts and specifying a custom branch via a dedicated input is planned for a future release.
-
 > If you use `useDefaultPatterns: true`, see [DEFAULT_PATTERNS.md](./DEFAULT_PATTERNS.md) for a detailed explanation of the default branch patterns.
 
 ## Inputs
 
-| Name                 | Description                                                      | Required | Default                |
-|----------------------|------------------------------------------------------------------|----------|------------------------|
-| `regex`              | The regex pattern to match the branch name against.              | No       | ""                    |
-| `path`               | The path to the file containing the regex pattern.               | No       | ""                    |
-| `useDefaultPatterns` | Use default patterns for branch matching.                        | No       | false                  |
-| `failOnUnmatchedRegex` | Fail the action if the branch does not match the regex pattern. | No       | true                  |
-| `branchName`         | The branch name to check against the regex pattern.              | No       | ${{ github.head_ref }} |
+| Name                   | Description                                                                 | Required | Default                |
+|------------------------|-----------------------------------------------------------------------------|----------|------------------------|
+| `regex`                | The regex pattern to match the branch name against.                         | No       | ""                    |
+| `path`                 | The path to the file containing the regex pattern.                          | No       | ""                    |
+| `useDefaultPatterns`   | Use default patterns for branch matching.                                   | No       | false                  |
+| `failOnUnmatchedRegex` | Fail the action if the branch does not match the regex pattern.             | No       | true                   |
+| `branchName`           | The branch name to check against the regex pattern.                         | No       | ${{ github.head_ref }} |
+| `useWildcard`          | If true, treat patterns as simple wildcards (e.g. feature/*) instead of full regex. | No | false |
 
 > **Note**: Either `regex`, `path`, or `useDefaultPatterns` must be provided. If both `regex` and `path` are provided, the `path` input takes precedence. You can't use `useDefaultPatterns` and `path` at the same time.
 
