@@ -20,6 +20,7 @@ async function run() {
         const useDefaultPatterns = core.getInput('useDefaultPatterns', { required: false, default: false });
         const failOnUnmatchedRegex = core.getInput('failOnUnmatchedRegex', { required: false, default: true });
         const inputPath = core.getInput('path', { required: false, default: "" });
+        const useWildcard = core.getInput('useWildcard', { required: false, default: false });
         const branchName = core.getInput('branchName', { required: false, default: github.head_ref  });
         
         let pathToRegexFile = populateDefaultPatterns(inputPath, useDefaultPatterns);
@@ -44,6 +45,12 @@ async function run() {
         }
 
         for (const regex of regexContent) {
+
+            if (useWildcard === 'true' || useWildcard === true) {
+                core.info(`Using wildcard regex: "${regex}"`);
+                regex = wildcardToRegex(regex);
+                core.info(`Converted to regex: "${regex}"`);
+            }
             const regexPattern = new RegExp(regex);
             
             if (regexPattern.test(branchName)) {
@@ -112,6 +119,14 @@ function parseYAML(useFile, filePath, regex) {
     } else {
         return YAML.parse(regex);
     }
+}
+
+function wildcardToRegex(pattern) {
+    // Escape regex special chars except *
+    let regex = pattern.replace(/[.+?^${}()|[\]\\]/g, '\\$&');
+    // Replace * with .*
+    regex = regex.replace(/\*/g, '.*');
+    return `^${regex}$`;
 }
 
 run();
