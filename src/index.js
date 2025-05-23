@@ -16,7 +16,7 @@ async function run() {
         // regex:
         //   - "regex1"
         //   - "regex2"
-        const regex = core.getInput('regex', { required: false, default: "" });
+        let regex = core.getInput('regex', { required: false, default: "" });
         const useDefaultPatterns = core.getInput('useDefaultPatterns', { required: false, default: false });
         const failOnUnmatchedRegex = core.getInput('failOnUnmatchedRegex', { required: false, default: true });
         const inputPath = core.getInput('path', { required: false, default: "" });
