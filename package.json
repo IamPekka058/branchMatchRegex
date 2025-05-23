@@ -1,6 +1,6 @@
 {
   "name": "branchmatchregex",
-  "version": "0.1.2",
+  "version": "0.4.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
