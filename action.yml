@@ -24,6 +24,10 @@ inputs:
     description: 'The branch name to check against the regex pattern'
     required: false
     default: ${{ github.head_ref }}
+  useWildcard:
+    description: 'Use wildcard matching instead of regex'
+    required: false
+    default: false
   
 runs:
   using: 'node20'
