@@ -1,6 +1,6 @@
 {
   "name": "branchmatchregex",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -22,8 +22,9 @@
   "dependencies": {
     "@actions/core": "^1.11.1",
     "@actions/github": "^6.0.1",
-    "yaml": "^2.3.4",
-    "path": "^0.12.7"
+    "node-fetch": "^2.7.0",
+    "path": "^0.12.7",
+    "yaml": "^2.3.4"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.38.0"
