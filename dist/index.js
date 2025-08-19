@@ -40449,10 +40449,10 @@ async function run() {
         //   - "regex1"
         //   - "regex2"
         let regex = core.getInput('regex', { required: false, default: "" });
-        const useDefaultPatterns = core.getInput('useDefaultPatterns', { required: false, default: false });
-        const failOnUnmatchedRegex = core.getInput('failOnUnmatchedRegex', { required: false, default: true });
-        const inputPath = core.getInput('path', { required: false, default: "" });
-        const useWildcard = core.getInput('useWildcard', { required: false, default: false });
+        const useDefaultPatterns = core.getBooleanInput('useDefaultPatterns', { required: false, default: false });
+        const failOnUnmatchedRegex = core.getBooleanInput('failOnUnmatchedRegex', { required: false, default: true });
+        const inputPath = core.getInput('inputPath', { required: false, default: "" });
+        const useWildcard = core.getBooleanInput('useWildcard', { required: false, default: false });
         const branchName = core.getInput('branchName', { required: false, default: github.head_ref  });
         
         let pathToRegexFile = populateDefaultPatterns(inputPath, useDefaultPatterns);
@@ -40461,16 +40461,16 @@ async function run() {
 
         validateInput(inputPath, regex, useDefaultPatterns);
 
-        const useFile = pathToRegexFile && pathToRegexFile.strip !== '';
+        const useFile = pathToRegexFile && pathToRegexFile.trim() !== '';
 
-        if (useFile && !fs.existsSync(pathToRegexFile)) {
+        if (useFile && !isUrl(pathToRegexFile) && !fs.existsSync(pathToRegexFile)) {
             core.setFailed(`File "${pathToRegexFile}" does not exist.`);
             return;
         }
         
         let regexContent = [];
         
-        regexContent = parseYAML(useFile, pathToRegexFile, regex);
+        regexContent = await parseYAML(useFile, pathToRegexFile, regex);
         
         if (!Array.isArray(regexContent)) {
             regexContent = [regexContent];
@@ -40478,7 +40478,7 @@ async function run() {
 
         for (regex of regexContent) {
 
-            if (useWildcard === 'true' || useWildcard === true) {
+            if (useWildcard) {
                 core.info(`Using wildcard regex: "${regex}"`);
                 regex = wildcardToRegex(regex);
                 core.info(`Converted to regex: "${regex}"`);
@@ -40499,27 +40499,27 @@ async function run() {
 }
 
 function validateInput(inputPath, regex, useDefaultPatterns) {
-    let bothFilesSpecified = inputPath && (useDefaultPatterns === true || useDefaultPatterns === "true");
+    let bothFilesSpecified = inputPath && useDefaultPatterns;
     let allInputsEmpty = !inputPath && !regex && !useDefaultPatterns;
     let bothInputAndRegexSpecified = inputPath && regex;
     
     if(bothFilesSpecified){
-        core.setFailed('Path and useDefaultPatterns cannot be used together.');
+        core.setFailed('inputPath and useDefaultPatterns cannot be used together.');
         return;
     }
 
     if(allInputsEmpty){ 
-        core.setFailed('Either path, regex or useDefaultPatterns must be provided.');
+        core.setFailed('Either inputPath, regex or useDefaultPatterns must be provided.');
         return;
     }
 
     if(bothInputAndRegexSpecified) {
-        core.info('Only one of path or regex must be provided. Using path.');
+        core.info('Only one of inputPath or regex must be provided. Using inputPath.');
     }
 }
 
 function populateDefaultPatterns(inputPath, useDefaultPatterns) {
-    if (useDefaultPatterns === true || useDefaultPatterns === 'true') {
+    if (useDefaultPatterns) {
         return __nccwpck_require__.ab + "default-patterns.yml";
     }
     return inputPath;
@@ -40544,10 +40544,19 @@ function validateContext(branchName) {
     }
 }
 
-function parseYAML(useFile, filePath, regex) {
-    if (useFile === true || useFile === 'true') {
-        const file = fs.readFileSync(filePath, 'utf8');
-        return YAML.parse(file);
+async function parseYAML(useFile, filePath, regex) {
+    if (useFile) {
+        if (isUrl(filePath)) {
+            const response = await fetch(filePath);
+            if (!response.ok) {
+                throw new Error(`Failed to fetch ${filePath}: ${response.status} ${response.statusText}`);
+            }
+            const body = await response.text();
+            return YAML.parse(body);
+        } else {
+            const file = fs.readFileSync(filePath, 'utf8');
+            return YAML.parse(file);
+        }
     } else {
         return YAML.parse(regex);
     }
@@ -40561,7 +40570,17 @@ function wildcardToRegex(pattern) {
     return `^${regex}$`;
 }
 
+function isUrl(s) {
+    try {
+        new URL(s);
+        return true;
+    } catch {
+        return false;
+    }
+}
+
 run();
+
 module.exports = __webpack_exports__;
 /******/ })()
 ;
