@@ -1,4 +1,5 @@
 name: Test branchMatchRegex Action
+
 on:
   pull_request:
     types: [opened, synchronize]
@@ -47,7 +48,7 @@ jobs:
       - name: Test with file
         uses: ./
         with:
-          path: .github/branches.yml
+          inputPath: .github/branches.yml
 
       - name: Test with file
         uses: ./
@@ -59,3 +60,8 @@ jobs:
         with:
           useDefaultPatterns: true
           branchName: "feature/test"
+
+      - name: Test with URL
+        uses: ./
+        with:
+          inputPath: 'https://raw.githubusercontent.com/IamPekka058/branchMatchRegex/main/assets/default-patterns.yml'
