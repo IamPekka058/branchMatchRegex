@@ -1,7 +1,6 @@
 const fs = require('fs');
 const YAML = require('yaml');
 const path = require('path');
-const fetch = require('node-fetch');
 
 const core = require('@actions/core');
 const github = require('@actions/github');
@@ -30,7 +29,7 @@ async function run() {
 
         validateInput(inputPath, regex, useDefaultPatterns);
 
-        const useFile = pathToRegexFile && pathToRegexFile.strip !== '';
+        const useFile = pathToRegexFile && pathToRegexFile.trim() !== '';
 
         if (useFile && !isUrl(pathToRegexFile) && !fs.existsSync(pathToRegexFile)) {
             core.setFailed(`File "${pathToRegexFile}" does not exist.`);
@@ -136,11 +135,16 @@ function wildcardToRegex(pattern) {
     let regex = pattern.replace(/[.+?^${}()|[\]\\]/g, '\\$&');
     // Replace * with .*
     regex = regex.replace(/\*/g, '.*');
-    return `^${regex}`;
+    return `^${regex}$`;
 }
 
 function isUrl(s) {
-    return s.startsWith('http://') || s.startsWith('https://');
+    try {
+        new URL(s);
+        return true;
+    } catch {
+        return false;
+    }
 }
 
 run();
