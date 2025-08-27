@@ -13,13 +13,13 @@
 | Name                   | Description                                                                 | Required | Default                |
 |------------------------|-----------------------------------------------------------------------------|----------|------------------------|
 | `regex`                | The regex pattern to match the branch name against.                         | No       | ""                    |
-| `inputPath`            | The path or URL to the file containing the regex patterns.                  | No       | ""                    |
+| `path`                 | The path or URL to the file containing the regex pattern.                   | No       | ""                    |
 | `useDefaultPatterns`   | Use default patterns for branch matching.                                   | No       | false                  |
 | `failOnUnmatchedRegex` | Fail the action if the branch does not match the regex pattern.             | No       | true                   |
 | `branchName`           | The branch name to check against the regex pattern.                         | No       | ${{ github.head_ref }} |
 | `useWildcard`          | If true, treat patterns as simple wildcards (e.g. feature/*) instead of full regex. | No | false |
 
-> **Note**: Either `regex`, `inputPath`, or `useDefaultPatterns` must be provided. If both `regex` and `inputPath` are provided, the `inputPath` input takes precedence. You can't use `useDefaultPatterns` and `inputPath` at the same time.
+> **Note**: Either `regex`, `path`, or `useDefaultPatterns` must be provided. If both `regex` and `path` are provided, the `path` input takes precedence. You can't use `useDefaultPatterns` and `path` at the same time.
 
 ## Example Usage
 
@@ -56,7 +56,7 @@ Below is an example of how to use the `branchMatchRegex` action in a GitHub work
 - name: Run branchMatchRegex action
   uses: IamPekka058/branchMatchRegex@v1
   with:
-    inputPath: 'branch-regex-patterns.yml'
+    path: 'branch-regex-patterns.yml'
 ```
 
 The `branch-regex-patterns.yml` file could look like this:
@@ -79,7 +79,7 @@ The `branch-regex-patterns.yml` file could look like this:
 - name: Run branchMatchRegex action
   uses: IamPekka058/branchMatchRegex@v1
   with:
-    inputPath: 'https://example.com/patterns.yml'
+    path: 'https://example.com/patterns.yml'
 ```
 
 ## License
