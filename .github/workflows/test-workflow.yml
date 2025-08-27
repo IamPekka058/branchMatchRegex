@@ -48,7 +48,7 @@ jobs:
       - name: Test with file
         uses: ./
         with:
-          inputPath: .github/branches.yml
+          path: .github/branches.yml
 
       - name: Test with file
         uses: ./
@@ -64,4 +64,4 @@ jobs:
       - name: Test with URL
         uses: ./
         with:
-          inputPath: 'https://raw.githubusercontent.com/IamPekka058/branchMatchRegex/main/assets/default-patterns.yml'
+          path: 'https://raw.githubusercontent.com/IamPekka058/branchMatchRegex/main/assets/default-patterns.yml'

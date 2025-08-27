@@ -19,7 +19,7 @@ async function run() {
         let regex = core.getInput('regex', { required: false, default: "" });
         const useDefaultPatterns = core.getBooleanInput('useDefaultPatterns', { required: false, default: false });
         const failOnUnmatchedRegex = core.getBooleanInput('failOnUnmatchedRegex', { required: false, default: true });
-        const inputPath = core.getInput('inputPath', { required: false, default: "" });
+        const inputPath = core.getInput('path', { required: false, default: "" });
         const useWildcard = core.getBooleanInput('useWildcard', { required: false, default: false });
         const branchName = core.getInput('branchName', { required: false, default: github.head_ref  });
         
@@ -72,17 +72,17 @@ function validateInput(inputPath, regex, useDefaultPatterns) {
     let bothInputAndRegexSpecified = inputPath && regex;
     
     if(bothFilesSpecified){
-        core.setFailed('inputPath and useDefaultPatterns cannot be used together.');
+        core.setFailed('path and useDefaultPatterns cannot be used together.');
         return;
     }
 
     if(allInputsEmpty){ 
-        core.setFailed('Either inputPath, regex or useDefaultPatterns must be provided.');
+        core.setFailed('Either path, regex or useDefaultPatterns must be provided.');
         return;
     }
 
     if(bothInputAndRegexSpecified) {
-        core.info('Only one of inputPath or regex must be provided. Using inputPath.');
+        core.info('Only one of path or regex must be provided. Using path.');
     }
 }
 

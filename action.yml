@@ -8,7 +8,7 @@ inputs:
     description: 'The regex pattern to match the branch name against'
     required: false
     default: ''
-  inputPath:
+  path:
     description: 'The path or URL to the file containing the regex pattern'
     required: false
     default: ''
