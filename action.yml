@@ -1,34 +1,34 @@
 name: 'branchMatchRegex'
-description: 'Check if the current branch matches a regex pattern'
+description: 'Check if the current branch matches a regex/wildcard pattern'
 author: 'IamPekka058 <59747867+IamPekka058@users.noreply.github.com>'
 
-
 inputs:
-  regex:
-    description: 'The regex pattern to match the branch name against'
+  patterns:
+    description: 'The regex/wildcard patterns to match against the branch'
     required: false
     default: ''
   path:
-    description: 'The path or URL to the file containing the regex pattern'
+    description: 'The path or URL to the file containing the pattern'
     required: false
     default: ''
+  failOnUnmatchedPattern:
+    description: 'Fail the action if the branch does not match the pattern'
+    required: false
+    default: 'true'
+  useWildcardPatterns:
+    description: 'Use wildcard patterns for branch matching instead of regex'
+    required: false
+    default: 'false'
   useDefaultPatterns:
     description: 'Use default patterns for branch matching'
     required: false
-    default: false
-  failOnUnmatchedRegex:
-    description: 'Fail the action if the branch does not match the regex pattern'
-    required: false
-    default: true
-  branchName:
-    description: 'The branch name to check against the regex pattern'
-    required: false
+    default: 'false'
+  branch:
+    description: 'The branch to match against the pattern'
+    required: true
     default: ${{ github.head_ref }}
-  useWildcard:
-    description: 'Use wildcard matching instead of regex'
-    required: false
-    default: false
-  
+
+
 runs:
   using: 'node20'
   main: 'dist/index.js'
