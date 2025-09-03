@@ -145,6 +145,6 @@ The file `branch-patterns.yml` could look like this:
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE)
 file for details.
 
-<div align="center">
+<div style="text-align: center;">
   <sub>Made with ❤️ in Bavaria</sub>
 </div>
