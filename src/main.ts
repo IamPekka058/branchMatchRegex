@@ -35,6 +35,8 @@ export async function run(): Promise<void> {
           .split('\n')
           .map((p) => p.trim())
           .filter((p) => p)
+          // Support YAML-style lists: remove leading '- ' if present
+          .map((p) => (p.startsWith('- ') ? p.slice(2).trim() : p))
       )
     }
     if (useDefaultPatterns) {
