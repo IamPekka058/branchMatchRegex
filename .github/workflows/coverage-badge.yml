@@ -4,6 +4,9 @@ on:
   push:
     branches: [ main, docs/coverageBadge ]
 
+permissions:
+  contents: write
+
 jobs:
   test-and-badge:
     runs-on: ubuntu-latest
@@ -39,5 +42,6 @@ jobs:
           git add badges/coverage.svg
           git add .
           git diff --cached --quiet || git commit -m "🚀 Add coverage badge [skip ci]"
-          git push        env:
+          git push
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
