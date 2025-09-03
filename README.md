@@ -1,5 +1,6 @@
 # branchMatchRegex
 
+ ![Coverage](./badges/coverage.svg)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/IamPekka058/branchMatchRegex)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/IamPekka058/branchMatchRegex/.github/workflows/build-and-commit.yml)
 ![GitHub](https://img.shields.io/github/license/IamPekka058/branchMatchRegex)
