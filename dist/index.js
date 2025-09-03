@@ -34220,7 +34220,9 @@ async function run() {
             allPatterns.push(...patterns
                 .split('\n')
                 .map((p) => p.trim())
-                .filter((p) => p));
+                .filter((p) => p)
+                // Support YAML-style lists: remove leading '- ' if present
+                .map((p) => (p.startsWith('- ') ? p.slice(2).trim() : p)));
         }
         if (useDefaultPatterns) {
             allPatterns.push(...getDefaultPatterns(useWildcardPatterns));
