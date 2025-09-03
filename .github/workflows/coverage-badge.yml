@@ -2,7 +2,7 @@ name: Test & Coverage Badge
 
 on:
   push:
-    branches: [ main, docs/coverageBadge ]
+    branches: [ main ]
 
 permissions:
   contents: write
@@ -14,7 +14,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: docs/coverageBadge
+          ref: main
           ssh-key: ${{ secrets.DEPLOY_KEY }}
 
       - name: Set up Node.js
