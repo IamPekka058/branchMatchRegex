@@ -40,6 +40,23 @@ useful for enforcing branch naming conventions in your repositories.
 `path`) are combined. The order is: `patterns`, then default patterns, then
 file/URL. You can use any combination of sources at the same time.
 
+**Tip:** The `patterns` input supports both plain lists and YAML-style lists.
+For example, both of the following are valid:
+
+```yaml
+patterns: |
+  feature/*
+  fix/*
+```
+
+or
+
+```yaml
+patterns: |
+  - feature/*
+  - fix/*
+```
+
 ## Example Usage
 
 ### Example 1: Single inline pattern
