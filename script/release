@@ -2,7 +2,7 @@
 
 # Exit early
 # See: https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#The-Set-Builtin
-set -e
+set -euo pipefail
 
 # About:
 #
@@ -82,16 +82,16 @@ git tag "$new_tag" --annotate --message "$new_tag Release"
 echo -e "Tagged: ${BOLD_GREEN}$new_tag${OFF}"
 
 # 7. Set 'is_major_release' variable
-new_major_release_tag=$(expr "$new_tag" : "$major_semver_tag_regex")
+new_major_release_tag=$(echo "$new_tag" | grep -o -E '^v[0-9]*')
 
 if [[ "$latest_tag" = "[unknown]" ]]; then
 	# This is the first major release
 	is_major_release='yes'
 else
-	# Compare the major version of the latest tag with the new tag
-	latest_major_release_tag=$(expr "$latest_tag" : "$major_semver_tag_regex")
+	# Compare the major version of the latest tag mit dem neuen Tag
+	latest_major_release_tag=$(echo "$latest_tag" | grep -o -E '^v[0-9]*')
 
-	if ! [[ "$new_major_release_tag" = "$latest_major_release_tag" ]]; then
+	if [[ "$new_major_release_tag" != "$latest_major_release_tag" ]]; then
 		is_major_release='yes'
 	else
 		is_major_release='no'
@@ -99,7 +99,7 @@ else
 fi
 
 # 8. Point separate major release tag (e.g. v1, v2) to the new release
-if [ $is_major_release = 'yes' ]; then
+if [[ "$is_major_release" = 'yes' ]]; then
 	# Create a new major version tag and point it to this release
 	git tag "$new_major_release_tag" --annotate --message "$new_major_release_tag Release"
 	echo -e "New major version tag: ${BOLD_GREEN}$new_major_release_tag${OFF}"
@@ -112,12 +112,12 @@ fi
 # 9. Push the new tags (with commits, if any) to remote
 git push --follow-tags
 
-if [ $is_major_release = 'yes' ]; then
+if [[ "$is_major_release" = 'yes' ]]; then
 	# New major version tag is pushed with the '--follow-tags' flags
 	echo -e "Tags: ${BOLD_GREEN}$new_major_release_tag${OFF} and ${BOLD_GREEN}$new_tag${OFF} pushed to remote"
 else
 	# Force push the updated major version tag
-	git push $git_remote "$latest_major_release_tag" --force
+	git push "$git_remote" "$latest_major_release_tag" --force
 	echo -e "Tags: ${BOLD_GREEN}$latest_major_release_tag${OFF} and ${BOLD_GREEN}$new_tag${OFF} pushed to remote"
 fi
 
