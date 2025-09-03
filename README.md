@@ -31,7 +31,7 @@ useful for enforcing branch naming conventions in your repositories.
 | ------------------------ | ---------------------------------------------------------------------------------------------- | -------- | ------------------------ |
 | `patterns`               | The (regex or wildcard) patterns to match against the branch. Multiple patterns, one per line. | No       | ""                       |
 | `path`                   | Path or URL to a file containing patterns (one per line).                                      | No       | ""                       |
-| `useDefaultPatterns`     | Additionally use default patterns. See [DEFAULT_PATTERNS.md].                                  | No       | false                    |
+| `useDefaultPatterns`     | Additionally use default patterns. See [DEFAULT_PATTERNS.md](./DEFAULT_PATTERNS.md).           | No       | false                    |
 | `failOnUnmatchedPattern` | Fail the action if the branch does not match any pattern.                                      | No       | true                     |
 | `useWildcardPatterns`    | Treat patterns as wildcards (e.g. `feature/*`) instead of regex.                               | No       | false                    |
 | `branch`                 | The branch to check.                                                                           | Yes      | `${{ github.head_ref }}` |
@@ -145,6 +145,6 @@ The file `branch-patterns.yml` could look like this:
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE)
 file for details.
 
-<div align="center">
+<div style="text-align: center;">
   <sub>Made with ❤️ in Bavaria</sub>
 </div>
