@@ -15,16 +15,16 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '20'
-      
+
       - name: Test with single pattern
         uses: ./
         with:
-          regex: ".*"
-        
+          patterns: '.*'
+
       - name: Test with list
         uses: ./
         with:
-          regex: |
+          patterns: |
             - feature/*
             - fix/*
             - hotfix/*
@@ -43,7 +43,10 @@ jobs:
       - name: Test with inline list
         uses: ./
         with:
-          regex: "['feature/*', 'fix/*', 'hotfix/*', 'docs/*', 'test/*', 'refactor/*', 'style/*', 'ci/*', 'perf/*', 'i18n/*', 'security/*', 'release/*', 'chore/*', 'test/*']"
+          patterns:
+            "['feature/*', 'fix/*', 'hotfix/*', 'docs/*', 'test/*',
+            'refactor/*', 'style/*', 'ci/*', 'perf/*', 'i18n/*', 'security/*',
+            'release/*', 'chore/*', 'test/*']"
 
       - name: Test with file
         uses: ./
@@ -59,7 +62,7 @@ jobs:
         uses: ./
         with:
           useDefaultPatterns: true
-          branchName: "feature/test"
+          branchName: 'feature/test'
 
       - name: Test with URL
         uses: ./

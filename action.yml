@@ -28,7 +28,6 @@ inputs:
     required: true
     default: ${{ github.head_ref }}
 
-
 runs:
   using: 'node20'
   main: 'dist/index.js'
