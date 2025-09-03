@@ -85,12 +85,11 @@ function getPatternsFromFile(filePath: string, useWildcard: boolean): string[] {
 
     // If using wildcard patterns, convert them
     if (useWildcard) {
-      console.log('Using wildcard patterns')
-      for (const pattern of yamlContent.patterns) {
+      for (const pattern of yamlContent) {
         patterns.push(convertToWildcardPattern(pattern))
       }
     } else {
-      patterns.push(...yamlContent.patterns)
+      patterns.push(...yamlContent)
     }
   } catch (error) {
     core.setFailed(
