@@ -9,7 +9,7 @@ import * as core from '@actions/core'
 /**
  * Gets the default patterns from assets directory
  */
-export function getDefaultPatterns(useWildcard:boolean): string[] {
+export function getDefaultPatterns(useWildcard: boolean): string[] {
   const patterns: string[] = []
 
   const __filename = fileURLToPath(import.meta.url)
@@ -26,7 +26,7 @@ export function getDefaultPatterns(useWildcard:boolean): string[] {
         patterns.push(convertToWildcardPattern(pattern))
       }
     } else {
-      patterns.push(...yamlContent);
+      patterns.push(...yamlContent)
     }
   } catch (error) {
     core.setFailed(
