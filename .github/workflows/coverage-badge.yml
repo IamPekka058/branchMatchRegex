@@ -26,15 +26,16 @@ jobs:
       - name: Run tests with coverage
         run: npm run test -- --coverage
 
-      - name: Generate coverage badge
-        run: npm run coverage:badge
+      - name: Create Coverage Badges
+        uses: jaywcjlove/coverage-badges-cli@v2.2.0
+        with:
+          style: flat
+          source: coverage/coverage-summary.json
+          output: badges/coverage.svg
+          jsonPath: total.lines.pct
 
-      - name: Commit & push coverage badge
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add badges/coverage.svg
-          git diff --cached --quiet || (git commit -m ":package: update coverage badge [skip ci]" && git push)
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+      - name: Deploy badge to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./badges
