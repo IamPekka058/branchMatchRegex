@@ -25,6 +25,7 @@
     "bundle": "npm run format:write && npm run package",
     "ci-test": "cross-env NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest",
     "coverage": "npx make-coverage-badge --output-path ./badges/coverage.svg",
+    "coverage:badge": "npx coverage-badges --output badges/coverage.svg",
     "format:write": "npx prettier --write .",
     "format:check": "npx prettier --check .",
     "lint": "npx eslint .",
@@ -37,6 +38,7 @@
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.11.1",
+    "coverage-badges-cli": "^2.2.0",
     "yaml": "^2.8.1"
   },
   "devDependencies": {
