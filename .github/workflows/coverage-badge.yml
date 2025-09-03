@@ -2,7 +2,7 @@ name: Test & Coverage Badge
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 permissions:
   contents: write
