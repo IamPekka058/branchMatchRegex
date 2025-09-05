@@ -1,7 +1,7 @@
 {
   "name": "branchmatchregex",
   "description": "Check if the current branch matches a regex or wildcard pattern",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": "IamPekka058 <59747867+IamPekka058@users.noreply.github.com>",
   "type": "module",
   "homepage": "https://github.com/IamPekka058/branchMatchRegex/",
