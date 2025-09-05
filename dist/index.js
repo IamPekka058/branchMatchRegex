@@ -34165,7 +34165,7 @@ async function getPatternsFromUrl(url, useWildcard) {
     if (useWildcard) {
         const rawYaml = parse(body);
         const patterns = [];
-        for (const pattern of rawYaml.patterns) {
+        for (const pattern of rawYaml) {
             patterns.push(convertToWildcardPattern(pattern));
         }
         return patterns;

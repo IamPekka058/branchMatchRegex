@@ -69,7 +69,7 @@ async function getPatternsFromUrl(
   if (useWildcard) {
     const rawYaml = yaml.parse(body)
     const patterns: string[] = []
-    for (const pattern of rawYaml.patterns) {
+    for (const pattern of rawYaml) {
       patterns.push(convertToWildcardPattern(pattern))
     }
     return patterns

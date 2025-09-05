@@ -1,6 +1,4 @@
 import { jest } from '@jest/globals'
-import * as fs from 'fs'
-import * as yaml from 'yaml'
 
 const mockReadFileSync = jest.fn()
 const mockParse = jest.fn()
@@ -13,7 +11,7 @@ jest.unstable_mockModule('yaml', () => ({
   parse: mockParse
 }))
 
-global.fetch = jest.fn()
+global.fetch = jest.fn() as jest.MockedFunction<typeof fetch>
 
 const getService = await import('../src/getService.js')
 
@@ -85,7 +83,7 @@ describe('getService', () => {
         ok: true,
         text: () => Promise.resolve('patterns:\n  - feature/*\n  - bugfix/*')
       })
-      mockParse.mockReturnValue({ patterns: ['feature/*', 'bugfix/*'] })
+      mockParse.mockReturnValue(['feature/*', 'bugfix/*'])
       const patterns = await getService.getPatternsFromPath(
         'https://example.com/patterns.yml',
         true
