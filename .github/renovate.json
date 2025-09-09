@@ -4,6 +4,7 @@
   "major": {
     "automerge": false
   },
+  "reviewers": ["IamPekka058"],
   "packageRules": [
     {
       "matchUpdateTypes": ["patch"],
