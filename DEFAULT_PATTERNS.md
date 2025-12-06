@@ -38,15 +38,15 @@ patterns:
 | ------------- | ------- | ------------------------------------------------ | -------------------------------------- |
 | `feature/`    | ✨      | New features or major functionality enhancements | `feature/user-authentication`          |
 | `fix/`        | 🐛      | Bug fixes, error corrections                     | `fix/crash-on-startup`                 |
-| `hotfix/`     | 🚑️     | Critical or urgent bug fixes                     | `hotfix/login-failure`                 |
+| `hotfix/`     | 🚑️      | Critical or urgent bug fixes                     | `hotfix/login-failure`                 |
 | `docs/`       | 📝      | Documentation changes                            | `docs/api-usage-guide`                 |
 | `test/`       | 🧪      | Adding or updating tests                         | `test/user-service-tests`              |
 | `refactor/`   | ♻️      | Refactoring without changing functionality       | `refactor/database-layer`              |
 | `style/`      | 🎨      | UI/UX improvements or code formatting            | `style/button-alignment`               |
 | `ci/`         | ⚙️      | CI/CD or automation changes                      | `ci/update-pipeline`                   |
-| `perf/`       | ⚡️     | Performance optimizations                        | `perf/cache-optimization`              |
+| `perf/`       | ⚡️      | Performance optimizations                        | `perf/cache-optimization`              |
 | `i18n/`       | 🌍      | Internationalization, translations               | `i18n/add-french-language`             |
-| `security/`   | 🔒️     | Security-related changes                         | `security/fix-token-leak`              |
+| `security/`   | 🔒️      | Security-related changes                         | `security/fix-token-leak`              |
 | `release/`    | 📦      | Release preparation or management                | `release/v2.1.0`                       |
 | `chore/`      | 🛠️      | Maintenance, dependencies, tooling               | `chore/update-eslint`                  |
 | `dependabot/` | 🤖      | Automated dependency updates (Dependabot)        | `dependabot/npm_and_yarn/axios-0.21.1` |
