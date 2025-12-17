@@ -63,3 +63,4 @@ jobs:
           VALIDATE_BIOME_LINT: false
           VALIDATE_BIOME_FORMAT: false
           VALIDATE_CHECKOV: false
+          PRETTIER_CONFIG_FILE: .prettierrc
