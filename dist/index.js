@@ -34113,8 +34113,8 @@ function parse(src, reviver, options) {
 }
 
 function convertToWildcardPattern(pattern) {
-    let cleanPattern = pattern.replace(/[.+?^${}()|[\]\\]/g, '\\$&');
-    cleanPattern = cleanPattern.replace(/\*/g, '.*');
+    let cleanPattern = pattern.replace(/[.+?^${}()|[\]\\]/g, "\\$&");
+    cleanPattern = cleanPattern.replace(/\*/g, ".*");
     return `^${cleanPattern}$`;
 }
 
@@ -34125,9 +34125,9 @@ function getDefaultPatterns(useWildcard) {
     const patterns = [];
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = dirname(__filename);
-    const filePath = require$$1.join(__dirname, '../assets/default-patterns.yml');
+    const filePath = require$$1.join(__dirname, "../assets/default-patterns.yml");
     try {
-        const fileContent = require$$1$1.readFileSync(filePath, 'utf8');
+        const fileContent = require$$1$1.readFileSync(filePath, "utf8");
         const yamlContent = parse(fileContent);
         // If using wildcard patterns, convert them
         if (useWildcard) {
@@ -34175,7 +34175,7 @@ async function getPatternsFromUrl(url, useWildcard) {
 function getPatternsFromFile(filePath, useWildcard) {
     const patterns = [];
     try {
-        const fileContent = require$$1$1.readFileSync(filePath, 'utf8');
+        const fileContent = require$$1$1.readFileSync(filePath, "utf8");
         const yamlContent = parse(fileContent);
         // If using wildcard patterns, convert them
         if (useWildcard) {
@@ -34202,12 +34202,12 @@ function getPatternsFromFile(filePath, useWildcard) {
 async function run() {
     try {
         const allPatterns = [];
-        const patterns = coreExports.getInput('patterns');
-        const path = coreExports.getInput('path');
-        const failOnUnmatchedPattern = coreExports.getInput('failOnUnmatchedPattern') === 'true';
-        const useWildcardPatterns = coreExports.getInput('useWildcardPatterns') === 'true';
-        const useDefaultPatterns = coreExports.getInput('useDefaultPatterns') === 'true';
-        const branch = coreExports.getInput('branch');
+        const patterns = coreExports.getInput("patterns");
+        const path = coreExports.getInput("path");
+        const failOnUnmatchedPattern = coreExports.getInput("failOnUnmatchedPattern") === "true";
+        const useWildcardPatterns = coreExports.getInput("useWildcardPatterns") === "true";
+        const useDefaultPatterns = coreExports.getInput("useDefaultPatterns") === "true";
+        const branch = coreExports.getInput("branch");
         coreExports.debug(`Patterns: ${patterns}`);
         coreExports.debug(`Path: ${path}`);
         coreExports.debug(`Fail on unmatched pattern: ${failOnUnmatchedPattern}`);
@@ -34217,11 +34217,11 @@ async function run() {
         coreExports.info(`Checking branch '${branch}' against provided patterns...`);
         if (patterns) {
             allPatterns.push(...patterns
-                .split('\n')
+                .split("\n")
                 .map((p) => p.trim())
                 .filter((p) => p)
                 // Support YAML-style lists: remove leading '- ' if present
-                .map((p) => (p.startsWith('- ') ? p.slice(2).trim() : p)));
+                .map((p) => (p.startsWith("- ") ? p.slice(2).trim() : p)));
         }
         if (useDefaultPatterns) {
             allPatterns.push(...getDefaultPatterns(useWildcardPatterns));
