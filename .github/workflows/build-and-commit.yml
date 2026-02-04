@@ -41,6 +41,7 @@ jobs:
           name: action-dist
           path: dist
   commit:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
