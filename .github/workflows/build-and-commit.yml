@@ -91,6 +91,11 @@ jobs:
           name: action-dist
           path: dist
 
+      - name: Ensure local matches remote
+        run: |
+          git fetch origin main
+          git reset --hard origin/main
+
       - name: Compare Directories
         id: diff
         run: |
