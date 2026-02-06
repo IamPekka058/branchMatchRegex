@@ -2,9 +2,18 @@ import { jest } from '@jest/globals'
 
 const mockReadFileSync = jest.fn()
 const mockParse = jest.fn()
+const mockPromisesReadFile = jest.fn()
 
 jest.unstable_mockModule('fs', () => ({
-  readFileSync: mockReadFileSync
+  readFileSync: mockReadFileSync,
+  constants: {},
+  promises: {
+    readFile: mockPromisesReadFile,
+    lstat: jest.fn(),
+    readdir: jest.fn(),
+    readlink: jest.fn(),
+    realpath: jest.fn(),
+  },
 }))
 
 jest.unstable_mockModule('yaml', () => ({
