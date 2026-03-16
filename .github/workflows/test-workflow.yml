@@ -43,6 +43,7 @@ jobs:
             - chore/*
             - test/*
             - renovate/*
+            - dependabot/*
 
       - name: Test with inline list
         uses: ./
@@ -50,7 +51,7 @@ jobs:
           patterns:
             "['feature/*', 'fix/*', 'hotfix/*', 'docs/*', 'test/*',
             'refactor/*', 'style/*', 'ci/*', 'perf/*', 'i18n/*', 'security/*',
-            'release/*', 'chore/*', 'test/*', 'renovate/*']"
+            'release/*', 'chore/*', 'test/*', 'renovate/*, dependabot/*']"
 
       - name: Test with file
         uses: ./
