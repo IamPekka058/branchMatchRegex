@@ -1,29 +1,5 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"],
-  "major": {
-    "automerge": false
-  },
+  "extends": ["RubberDuckCrew/.github/.github/workflows/action-add-project.yml@v2.0.0"],
   "reviewers": ["IamPekka058"],
-  "packageRules": [
-    {
-      "matchUpdateTypes": ["patch"],
-      "automerge": true
-    },
-    {
-      "matchUpdateTypes": ["pin"],
-      "commitMessagePrefix": "📌",
-      "commitMessageAction": "Pin"
-    },
-    {
-      "matchUpdateTypes": ["rollback"],
-      "commitMessagePrefix": "⬇️",
-      "commitMessageAction": "Downgrade"
-    }
-  ],
-  "commitMessagePrefix": "⬆️",
-  "commitMessageAction": "Upgrade",
-  "labels": ["📌 Dependencies"],
-  "dependencyDashboardTitle": "📌 Dependency Dashboard",
-  "dependencyDashboardLabels": ["📌 Dependencies"]
 }
