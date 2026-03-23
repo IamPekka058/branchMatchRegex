@@ -66,7 +66,7 @@ jobs:
         run: npm test
 
       - name: Build action
-        run: npm run build
+        run: npm run package
 
       - name: Commit changes
         uses: suzuki-shunsuke/commit-action@f12e2d628a4ab72dcefe7890ae07e8dbf1e201b9 # v0.1.1
