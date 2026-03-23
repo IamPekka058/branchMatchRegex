@@ -17,12 +17,12 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
         with:
-          node-version: '24.14.0'
+          node-version: "24.14.0"
 
       - name: Test with single pattern
         uses: ./
         with:
-          patterns: '.*'
+          patterns: ".*"
 
       - name: Test with list
         uses: ./
@@ -48,8 +48,7 @@ jobs:
       - name: Test with inline list
         uses: ./
         with:
-          patterns:
-            "['feature/*', 'fix/*', 'hotfix/*', 'docs/*', 'test/*',
+          patterns: "['feature/*', 'fix/*', 'hotfix/*', 'docs/*', 'test/*',
             'refactor/*', 'style/*', 'ci/*', 'perf/*', 'i18n/*', 'security/*',
             'release/*', 'chore/*', 'test/*', 'renovate/*, dependabot/*']"
 
@@ -67,9 +66,9 @@ jobs:
         uses: ./
         with:
           useDefaultPatterns: true
-          branch: 'feature/test'
+          branch: "feature/test"
 
       - name: Test with URL
         uses: ./
         with:
-          path: 'https://raw.githubusercontent.com/IamPekka058/branchMatchRegex/main/assets/default-patterns.yml'
+          path: "https://raw.githubusercontent.com/IamPekka058/branchMatchRegex/main/assets/default-patterns.yml"
