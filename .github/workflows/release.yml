@@ -1,0 +1,88 @@
+name: Create Release
+run-name: Create Release v${{ github.event.inputs.version }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "The version to release (e.g., 1.2.3). The 'v' prefix is added automatically."
+        required: true
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      VERSION: ${{ github.event.inputs.version }}
+
+    steps:
+      - name: Validate version input
+        run: |
+          if ! echo "$VERSION" | grep -E -x '^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$' >/dev/null; then
+            echo "ERROR: VERSION is not a valid semver: '$VERSION'"
+            exit 1
+          fi
+
+      - name: Check if secrets are available
+        id: check-secrets
+        run: |
+          echo "secrets_available=${{
+            vars.BOT_APP_ID &&
+            secrets.BOT_APP_PRIVATE_KEY &&
+            'true' || ''
+          }}" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub App token
+        uses: actions/create-github-app-token@f8d387b68d61c58ab83c6c016672934102569859 # v3.0.0
+        if: ${{ steps.check-secrets.outputs.secrets_available }}
+        id: app-token
+        with:
+          app-id: ${{ vars.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_APP_PRIVATE_KEY }}
+
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Npm setup
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        with:
+          node-version: 24.14.0
+          cache: "npm"
+
+      - name: Update package.json version
+        run: npm version "$VERSION" --no-git-tag-version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint code
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build action
+        run: npm run build
+
+      - name: Commit changes
+        uses: suzuki-shunsuke/commit-action@f12e2d628a4ab72dcefe7890ae07e8dbf1e201b9 # v0.1.1
+        with:
+          commit_message: "🔖 Release v${{ env.VERSION }} [skip ci]"
+          files: |
+            dist/
+            package.json
+            package-lock.json
+          github_token: ${{ steps.app-token.outputs.token || github.token }}
+          fail_on_self_push: false
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@153bb8e04406b158c6c84fc1615b65b24149a1fe # v2.6.1
+        with:
+          tag_name: "v${{ env.VERSION }}"
+          name: "🔖 branchMatchRegex ${{ env.VERSION }}"
+          draft: true
+          prerelease: false
