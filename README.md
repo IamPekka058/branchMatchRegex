@@ -66,7 +66,7 @@ patterns: |
 - name: Run branchMatchRegex action
   uses: IamPekka058/branchMatchRegex@v2
   with:
-    patterns: 'feature/.*'
+    patterns: "feature/.*"
 ```
 
 ### Example 2: Multiple inline patterns (one per line)
@@ -87,7 +87,7 @@ patterns: |
 - name: Run branchMatchRegex action
   uses: IamPekka058/branchMatchRegex@v2
   with:
-    path: 'branch-patterns.yml'
+    path: "branch-patterns.yml"
 ```
 
 The file `branch-patterns.yml` could look like this:
@@ -117,7 +117,7 @@ The file `branch-patterns.yml` could look like this:
       feature/.*
       bugfix/.*
     useDefaultPatterns: true
-    path: 'branch-patterns.yml'
+    path: "branch-patterns.yml"
 ```
 
 ### Example 6: Use wildcard patterns
@@ -138,7 +138,7 @@ The file `branch-patterns.yml` could look like this:
 - name: Run branchMatchRegex action
   uses: IamPekka058/branchMatchRegex@v2
   with:
-    path: 'https://example.com/patterns.yml'
+    path: "https://example.com/patterns.yml"
 ```
 
 ## License

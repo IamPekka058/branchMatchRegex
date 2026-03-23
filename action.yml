@@ -1,37 +1,37 @@
-name: 'branchMatchRegex'
-description: 'Check if the current branch matches a regex/wildcard pattern'
-author: 'IamPekka058 <59747867+IamPekka058@users.noreply.github.com>'
+name: "branchMatchRegex"
+description: "Check if the current branch matches a regex/wildcard pattern"
+author: "IamPekka058 <59747867+IamPekka058@users.noreply.github.com>"
 
 inputs:
   patterns:
-    description: 'The regex/wildcard patterns to match against the branch'
+    description: "The regex/wildcard patterns to match against the branch"
     required: false
-    default: ''
+    default: ""
   path:
-    description: 'The path or URL to the file containing the pattern'
+    description: "The path or URL to the file containing the pattern"
     required: false
-    default: ''
+    default: ""
   failOnUnmatchedPattern:
-    description: 'Fail the action if the branch does not match the pattern'
+    description: "Fail the action if the branch does not match the pattern"
     required: false
-    default: 'true'
+    default: "true"
   useWildcardPatterns:
-    description: 'Use wildcard patterns for branch matching instead of regex'
+    description: "Use wildcard patterns for branch matching instead of regex"
     required: false
-    default: 'false'
+    default: "false"
   useDefaultPatterns:
-    description: 'Use default patterns for branch matching'
+    description: "Use default patterns for branch matching"
     required: false
-    default: 'false'
+    default: "false"
   branch:
-    description: 'The branch to match against the pattern'
+    description: "The branch to match against the pattern"
     required: true
     default: ${{ github.head_ref }}
 
 runs:
-  using: 'node20'
-  main: 'dist/index.js'
+  using: "node20"
+  main: "dist/index.js"
 
 branding:
-  icon: 'check-circle'
-  color: 'blue'
+  icon: "check-circle"
+  color: "blue"
