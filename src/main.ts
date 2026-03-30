@@ -8,12 +8,12 @@ import { getDefaultPatterns, getPatternsFromPath } from "./getService.js";
  */
 export async function run(): Promise<void> {
   try {
-    const versionTag = process.env.GITHUB_ACTION_REF
+    const versionTag = process.env.GITHUB_ACTION_REF;
 
-    if(versionTag == "v1" || versionTag == "v2"){
+    if (versionTag == "v1" || versionTag == "v2") {
       core.warning(
         `You are using a deprecated floating tag (${versionTag}). This tag is no longer updated. ` +
-        `Please pin to a specific SemVer tag (e.g., v3.0.0) or a commit SHA for better security and stability.`
+          `Please pin to a specific SemVer tag (e.g., v3.0.0) or a commit SHA for better security and stability.`,
       );
     }
     const allPatterns: string[] = [];

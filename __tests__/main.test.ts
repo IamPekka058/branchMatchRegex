@@ -156,7 +156,7 @@ describe("main.run", () => {
     );
   });
 });
-describe('Action Version Warning', () => {
+describe("Action Version Warning", () => {
   const originalEnv = process.env;
 
   beforeEach(() => {
@@ -168,24 +168,24 @@ describe('Action Version Warning', () => {
     process.env = originalEnv;
   });
 
-  it('should log a warning if GITHUB_ACTION_REF is v1', async () => {
-    process.env.GITHUB_ACTION_REF = 'v1';
+  it("should log a warning if GITHUB_ACTION_REF is v1", async () => {
+    process.env.GITHUB_ACTION_REF = "v1";
     await main.run();
     expect(core.warning).toHaveBeenCalledWith(
-      expect.stringContaining('You are using a deprecated floating tag (v1)')
+      expect.stringContaining("You are using a deprecated floating tag (v1)"),
     );
   });
 
-  it('should log a warning if GITHUB_ACTION_REF is v2', async () => {
-    process.env.GITHUB_ACTION_REF = 'v2';
+  it("should log a warning if GITHUB_ACTION_REF is v2", async () => {
+    process.env.GITHUB_ACTION_REF = "v2";
     await main.run();
     expect(core.warning).toHaveBeenCalledWith(
-      expect.stringContaining('You are using a deprecated floating tag (v2)')
+      expect.stringContaining("You are using a deprecated floating tag (v2)"),
     );
   });
 
-  it('should NOT log a warning if GITHUB_ACTION_REF is a strict SemVer tag', async () => {
-    process.env.GITHUB_ACTION_REF = 'v3.0.0';
+  it("should NOT log a warning if GITHUB_ACTION_REF is a strict SemVer tag", async () => {
+    process.env.GITHUB_ACTION_REF = "v3.0.0";
     await main.run();
     expect(core.warning).not.toHaveBeenCalled();
   });
