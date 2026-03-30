@@ -64,7 +64,7 @@ patterns: |
 
 ```yaml
 - name: Run branchMatchRegex action
-  uses: IamPekka058/branchMatchRegex@v2
+  uses: IamPekka058/branchMatchRegex@v2.0.0
   with:
     patterns: "feature/.*"
 ```
@@ -73,7 +73,7 @@ patterns: |
 
 ```yaml
 - name: Run branchMatchRegex action
-  uses: IamPekka058/branchMatchRegex@v2
+  uses: IamPekka058/branchMatchRegex@v2.0.0
   with:
     patterns: |
       feature/.*
@@ -85,7 +85,7 @@ patterns: |
 
 ```yaml
 - name: Run branchMatchRegex action
-  uses: IamPekka058/branchMatchRegex@v2
+  uses: IamPekka058/branchMatchRegex@v2.0.0
   with:
     path: "branch-patterns.yml"
 ```
@@ -102,7 +102,7 @@ The file `branch-patterns.yml` could look like this:
 
 ```yaml
 - name: Run branchMatchRegex action
-  uses: IamPekka058/branchMatchRegex@v2
+  uses: IamPekka058/branchMatchRegex@v2.0.0
   with:
     useDefaultPatterns: true
 ```
@@ -111,7 +111,7 @@ The file `branch-patterns.yml` could look like this:
 
 ```yaml
 - name: Run branchMatchRegex action
-  uses: IamPekka058/branchMatchRegex@v2
+  uses: IamPekka058/branchMatchRegex@v2.0.0
   with:
     patterns: |
       feature/.*
@@ -124,7 +124,7 @@ The file `branch-patterns.yml` could look like this:
 
 ```yaml
 - name: Run branchMatchRegex action
-  uses: IamPekka058/branchMatchRegex@v2
+  uses: IamPekka058/branchMatchRegex@v2.0.0
   with:
     patterns: |
       feature/*
@@ -136,7 +136,7 @@ The file `branch-patterns.yml` could look like this:
 
 ```yaml
 - name: Run branchMatchRegex action
-  uses: IamPekka058/branchMatchRegex@v2
+  uses: IamPekka058/branchMatchRegex@v2.0.0
   with:
     path: "https://example.com/patterns.yml"
 ```
