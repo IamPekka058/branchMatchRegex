@@ -39523,6 +39523,11 @@ function getPatternsFromFile(filePath, useWildcard) {
  */
 async function run() {
     try {
+        const versionTag = process.env.GITHUB_ACTION_REF;
+        if (versionTag == "v1" || versionTag == "v2") {
+            warning(`You are using a deprecated floating tag (${versionTag}). This tag is no longer updated. ` +
+                `Please pin to a specific SemVer tag (e.g., v3.0.0) or a commit SHA for better security and stability.`);
+        }
         const allPatterns = [];
         const patterns = getInput("patterns");
         const path = getInput("path");
